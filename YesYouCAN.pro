@@ -117,7 +117,6 @@ HEADERS  += \
     
 
 DISTFILES += \
-    TODO.txt \
     applogo.rc
 
 RESOURCES += \
