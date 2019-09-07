@@ -1,0 +1,45 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file alias="reset">icons/Computer-Hardware-Restart-icon.png</file>
+        <file alias="dbc">icons/Misc-Database-3-icon.png</file>
+        <file alias="filter">icons/Actions-view-filter-icon.png</file>
+        <file alias="close">icons/delete-icon.png</file>
+        <file alias="logo">icons/Letter-Y-blue-icon.png</file>
+        <file alias="save">icons/Actions-document-save-icon.png</file>
+        <file alias="auxiliary_window">icons/Actions-window-duplicate-icon.png</file>
+        <file alias="trace">icons/Actions-go-down-search-icon.png</file>
+        <file alias="interface">icons/Link-icon.png</file>
+        <file alias="transmit">icons/Send-icon.png</file>
+        <file alias="receive">icons/Mailbox-receive-message-2-icon.png</file>
+        <file alias="new_message">icons/Status-mail-unread-new-icon.png</file>
+        <file alias="delete_message">icons/Status-mail-delete-icon.png</file>
+        <file alias="config_message">icons/mail-settings-icon.png</file>
+        <file alias="record">icons/Record-Pressed-icon.png</file>
+        <file alias="connected">icons/Actions-network-connect-icon.png</file>
+        <file alias="disconnected">icons/Actions-network-disconnect-icon.png</file>
+        <file alias="database_ok">icons/Misc-Database-3-icon_check.png</file>
+        <file alias="database_x">icons/Misc-Database-3-icon_x.png</file>
+        <file alias="eye">icons/eye-icon.png</file>
+        <file alias="pen">icons/Pencil-icon.png</file>
+        <file alias="unlock">icons/Lock-Unlock-icon.png</file>
+        <file alias="save_and_lock">icons/save_and_lock.png</file>
+        <file alias="alignBottom">icons/alignBottom.png</file>
+        <file alias="alignCenterH">icons/alignCenterH.png</file>
+        <file alias="alignCenterV">icons/alignCenterV.png</file>
+        <file alias="alignLeft">icons/alignLeft.png</file>
+        <file alias="alignRight">icons/alignRight.png</file>
+        <file alias="alignTop">icons/alignTop.png</file>
+        <file alias="distributeH">icons/distributeHorizontally.png</file>
+        <file alias="distributeV">icons/distributeVertically.png</file>
+        <file alias="zoomFit">icons/zoomFit.png</file>
+        <file alias="plus">icons/add-icon.png</file>
+        <file alias="plusplus">icons/adds-icons.png</file>
+        <file alias="pause">icons/pause.png</file>
+        <file alias="play">icons/play.png</file>
+        <file alias="apply">icons/accept-icon.png</file>
+        <file alias="warning">icons/sign-warning-icon.png</file>
+        <file alias="questionmark">icons/Help-icon.png</file>
+        <file alias="filter_check">icons/filter-icon-applied.png</file>
+        <file alias="error">icons/error-icon.png</file>
+    </qresource>
+</RCC>
