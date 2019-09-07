@@ -160,9 +160,6 @@ bool Document::hasParent()
 void Document::addChildren(Document *doc)
 {
 	// Add children
-	if(doc == 0)
-		return;
-
 	if(m_children_doc.contains(doc))
 		return; // Already children
 
@@ -250,6 +247,9 @@ QIcon Document::getIcon()
 
 		case CAN_WATCHER:
 			return QIcon(":/icons/eye");
+
+		case CAN_GRAPH:
+			return QIcon(":/icons/graph");
 
 		default:
 			return QIcon();

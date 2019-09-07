@@ -17,15 +17,17 @@
 #include "filterexpression.h"
 #include "model_customfilter.h"
 #include "filterlineedit.h"
+#include "widget_graphTab.h"
 
 class Document;
+class MainWindow;
 
 class CanTraceWidget : public AbstractTabWidget
 {
 	Q_OBJECT
 
 	public:
-		CanTraceWidget(QWidget *parent, Document *document);
+		CanTraceWidget(MainWindow *parent, Document *document);
 		~CanTraceWidget();
 
 		void setDbc(DbcModel *dbc);
@@ -62,6 +64,11 @@ class CanTraceWidget : public AbstractTabWidget
 
 		void changeReplayIndex();
 
+		void addGraph();
+
+	signals:
+		void dbcChanged(DbcModel *dbc); // Emitted when the dbc is updated
+
 	private:
 		void createActions();
 		void populateMenu();
@@ -75,6 +82,7 @@ class CanTraceWidget : public AbstractTabWidget
 		CanTraceModel *m_model;
 		CanMsgWidget *m_msgWidget;
 		HwInterface *m_device;
+		MainWindow *m_mainWindow;
 
 		// Menu related
 		QMenu *m_traceMenu;
@@ -89,6 +97,8 @@ class CanTraceWidget : public AbstractTabWidget
 
 		QAction* m_useTimestampOffset;
 		QAction* m_useMsgNumberOffset;
+
+		QAction* m_addGraph;
 
 		// Status bar related
 		QStatusBar* m_statusBar;

@@ -1,10 +1,13 @@
 #include "widget_cantrace.h"
 
+// Those includes in the header file cause compiling issues
 #include "document.h"
 #include "application.h"
 
-CanTraceWidget::CanTraceWidget(QWidget *parent, Document *document) : AbstractTabWidget(parent, document)
+CanTraceWidget::CanTraceWidget(MainWindow *parent, Document *document) : AbstractTabWidget(parent, document)
 {
+	m_mainWindow = parent;
+
 	m_dbc = 0;
 	m_msgWidget = new CanMsgWidget(m_dbc, this);
 	m_msgWidget->hide(); // Hide when no DBC associated
@@ -38,7 +41,7 @@ CanTraceWidget::CanTraceWidget(QWidget *parent, Document *document) : AbstractTa
 	m_view->setColumnWidth(TRACE_COL_DATA_LEN, 50);
 	m_view->setColumnWidth(TRACE_COL_DATA, 220);
 
-	connect(m_view->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), this, SLOT(selectionChangedSlot(QModelIndex)));
+	//connect(m_view->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), this, SLOT(selectionChangedSlot(QModelIndex)));
 
 	createActions(); // Menu and toolbar actions
 
@@ -178,6 +181,10 @@ void CanTraceWidget::createActions()
 	m_useTimestampOffset->setCheckable(true);
 	m_useTimestampOffset->setChecked(true);
 	connect(m_useTimestampOffset, SIGNAL(triggered(bool)), m_model, SLOT(useTimestampOffset(bool)));
+
+	m_addGraph = new QAction(QIcon(":/icons/graph"), "Add Graph", this);
+	m_addGraph->setToolTip("New graph tab from trace");
+	connect(m_addGraph, SIGNAL(triggered(bool)), this, SLOT(addGraph()));
 }
 
 void CanTraceWidget::populateToolBar()
@@ -193,6 +200,7 @@ void CanTraceWidget::populateToolBar()
 	m_toolbar->addSeparator();
 	m_toolbar->addAction(m_saveTraceAct);
 	m_toolbar->addAction(m_showFilterBarAct);
+	m_toolbar->addAction(m_addGraph);
 
 	if(!m_document->isSaved())
 		m_toolbar->addAction(m_exportSignalsAct);
@@ -216,6 +224,10 @@ void CanTraceWidget::populateMenu()
 	m_traceMenu->addSeparator();
 	m_traceMenu->addAction(m_useMsgNumberOffset);
 	m_traceMenu->addAction(m_useTimestampOffset);
+
+	m_traceMenu->addSeparator();
+	m_traceMenu->addAction(m_addGraph);
+
 }
 
 void CanTraceWidget::updateVisibleActions()
@@ -444,6 +456,7 @@ void CanTraceWidget::setTraceDbc()
 	if(dbc != 0)
 	{
 		setDbc(dbc);
+		emit dbcChanged(dbc);
 	}
 }
 
@@ -1034,7 +1047,6 @@ void CanTraceWidget::changeReplayIndex()
 	}
 }
 
-
 void CanTraceWidget::applyFilter()
 {
 	FilterExpression exp(m_filterBar->text(), m_dbc);
@@ -1090,4 +1102,33 @@ void CanTraceWidget::showFilterHelp()
 			//"- r(regex) : regular expression (not supported yet)\n"
 
 	QMessageBox::information(this, "Filter help", help_text);
+}
+
+void CanTraceWidget::addGraph()
+{
+	// Find an unexisting name for the trace
+	QString tabName;
+	for(int i = 0; i < 100; i++)
+	{
+		tabName = "Graph" + QString::number(i);
+
+		if(m_mainWindow->documentOf(tabName) == 0)
+			break;
+	}
+
+	// Create document for the new tab
+	Document *doc = new Document(CAN_GRAPH, tabName);
+	connect(doc, SIGNAL(documentChanged()), m_mainWindow, SLOT(updateTabNames()));
+	document()->addChildren(doc);
+
+	// Create widget for the new tab
+	GraphTab *tab = new GraphTab(m_dbc, this, doc, m_model);
+	connect(this, SIGNAL(dbcChanged(DbcModel*)), tab, SLOT(setDbc(DbcModel*)));
+	doc->setViewWidget(tab);
+
+	// Add new tab to the MainWindow tab widget
+	m_mainWindow->getTabWidget()->addTab(doc->getViewWidget(), doc->getIcon(), doc->fileName());
+	m_mainWindow->getTabWidget()->setCurrentIndex(m_mainWindow->getTabWidget()->count() - 1);
+
+	// Assign decoder and dbc to the graph widget
 }

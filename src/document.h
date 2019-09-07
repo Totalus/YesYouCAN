@@ -15,7 +15,8 @@ enum DOC_TYPE_t
 	CAN_FIXED_TRACE = 1003,
 	CAN_INTERFACE = 1004,		// Not a document type, but this definition is needed
 	CAN_TRANSMIT = 1005,
-	CAN_WATCHER = 1006
+	CAN_WATCHER = 1006,
+	CAN_GRAPH = 1007
 };
 
 enum FILE_TYPE_t
@@ -56,7 +57,6 @@ class Document : public QObject
 		bool hasChildren();
 		bool hasParent();
 		void addChildren(Document *doc);
-		void setParent(Document *doc);
 		QList<Document*> getChildren();
 		Document* getParent();
 		Document* getChildren(QString filePath); // Returns the Document object with the same path if contained in children
@@ -81,6 +81,9 @@ class Document : public QObject
 
 	signals:
 		void documentChanged();
+
+	private:
+		void setParent(Document *doc);
 
 	private:
 		QString m_fileName;				// Document file name

@@ -252,6 +252,7 @@ void MainWindow::openTrace()
 				// Create view widget
 				CanTraceWidget* trace_widget = new CanTraceWidget(this, doc);
 				trace_widget->loadTraceFile_BusMaster(doc->filePath());
+				connect(trace_widget, SIGNAL(openDocumentRequest(Document*)), this, SLOT(openDocument(Document*)));
 
 				doc->setViewWidget(trace_widget);
 				doc->setOpened(true);
@@ -260,11 +261,11 @@ void MainWindow::openTrace()
 			{
 				CanTraceWidget* trace_widget = new CanTraceWidget(this, doc);
 				trace_widget->loadTraceFile_PCAN(doc->filePath());
+				connect(trace_widget, SIGNAL(openDocumentRequest(Document*)), this, SLOT(openDocument(Document*)));
 
 				doc->setViewWidget(trace_widget);
 				doc->setOpened(true);
 			}
-
 			m_tabs->addTab(doc->getViewWidget(), doc->getIcon(), doc->fileName()); // Add view to tabs
 		}
 
@@ -281,7 +282,7 @@ void MainWindow::newTrace()
 	QString traceName;
 	for(int i = 0; i < 100; i++)
 	{
-		traceName = "CanTrace" + QString::number(i);
+		traceName = "Trace" + QString::number(i);
 
 		if(documentOf(traceName) == 0)
 			break;
@@ -840,18 +841,6 @@ void MainWindow::activateDocument(Document *doc)
 	// TODO : utiliser doc->isOpened() éventuellement
 	if(doc->getViewWidget() != 0)
 	{
-		/*
-		// Focus on corresponding tab
-		for(int i = 0; i < m_tabs->count(); i++)
-		{
-			AbstractTabWidget *w = qobject_cast<AbstractTabWidget*>(m_tabs->widget(i));
-
-			if(w != NULL) // Cast successful
-			{
-				m_tabs->setTabText(i, w->document()->fileName());
-			}
-		}
-		//*/
 		m_tabs->setCurrentWidget(doc->getViewWidget());
 	}
 	else
@@ -866,3 +855,48 @@ void MainWindow::activateDocument(Document *doc)
 		}
 	}
 }
+
+QTabWidget* MainWindow::getTabWidget()
+{
+	return m_tabs;
+}
+
+/*
+void MainWindow::addGraph(Document *parent_doc)
+{
+	if(parent_doc == 0)
+		return;
+
+	// Find an unexisting name for the trace
+	QString docName;
+	for(int i = 0; i < 100; i++)
+	{
+		docName = parent_doc->documentName() + ":Graph" + QString::number(i);
+
+		if(documentOf(docName) == 0)
+			break;
+	}
+
+	// Create the document object for this document
+	Document *doc = new Document(CAN_FIXED_TRACE, docName, &m_dbc_list, this);
+	connect(doc, SIGNAL(documentChanged()), this, SLOT(updateTabNames()));
+
+
+	GraphTab *graph_tab = new GraphTab(0, this, doc);
+	doc->setViewWidget(graph_tab);
+	doc->setSaved(false);
+	doc->setExists(false);
+
+	// Add widget to new tab
+	m_tabs->addTab(doc->getViewWidget(), doc->getIcon(), doc->fileName()); // Widget should exist
+	m_tabs->setCurrentIndex(m_tabs->count() - 1);
+
+	trace_widget->setDevice();
+
+	AbstractTabWidget *w = doc->getViewWidget();
+	if(w != 0)
+	{
+		m_tabs->addTab(w, doc->getIcon(), doc->documentName());
+	}
+}
+	*/

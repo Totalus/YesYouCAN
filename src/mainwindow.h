@@ -38,15 +38,21 @@ class MainWindow : public QMainWindow
 		void newWatcher();
 		void closeDocument(Document *doc);
 
+		//void addGraph(Document *parent_doc);
+
 		void tabChangedSlot(int index);
 		void changeTabFocusOnDocument(QString specific_document_name);
-		void activateDocument(Document *doc); // Document activated (take action according to document type)
+		void activateDocument(Document *doc); // Document activated (ex : double click) (take action according to document type)
 		void updateTabNames();
 
 		void newInterface();
 		bool configureInterface(HwInterface *iface);
 
 		void debug();
+
+		QTabWidget* getTabWidget();
+		Document* documentOf(QString fileName);
+		Document* documentOf(AbstractTabWidget *tab);
 
 	protected:
 		bool eventFilter(QObject *obj, QEvent *event);
@@ -58,7 +64,7 @@ class MainWindow : public QMainWindow
 
 	private:
 		QTabWidget* m_tabs;
-		DbcTreeWidget* m_tree;
+		//DbcTreeWidget* m_tree;
 
 		Document* m_root_document; // Container for all other documents
 		Document* m_interface_document; // Contains all interfaces
@@ -89,8 +95,7 @@ class MainWindow : public QMainWindow
 		QAction* m_newTxWidgetAct;
 		QAction* m_newWatcherAct;
 
-		Document* documentOf(QString fileName);
-		Document* documentOf(AbstractTabWidget *tab);
+
 
 
 };

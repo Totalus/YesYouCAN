@@ -40,6 +40,7 @@
         <file alias="warning">icons/sign-warning-icon.png</file>
         <file alias="questionmark">icons/Help-icon.png</file>
         <file alias="filter_check">icons/filter-icon-applied.png</file>
+        <file alias="graph">icons/Actions-office-chart-line-icon.png</file>
         <file alias="error">icons/error-icon.png</file>
     </qresource>
 </RCC>

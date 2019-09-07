@@ -15,7 +15,7 @@ include ( C:/Qwt-6.1.3/features/qwt.prf ) # Qwt (graphic charts framework)
 TARGET = YesYouCAN
 TEMPLATE = app
 
-INCLUDEPATH += src ui ressources src/canTraceTab src/canTransmitterTab src/common src/dbcTreeTab src/decoding src/interfaces/drivers src/interfaces/dialogs src/messageViewerTab src/misc src/signalViewerTab src/signalViewerTab/graphicsObjects src/interfaces/drivers/pcan-driver
+INCLUDEPATH += src ui ressources src/canTraceTab src/canTraceTab/graphTab src/canTransmitterTab src/common src/dbcTreeTab src/decoding src/interfaces/drivers src/interfaces/dialogs src/messageViewerTab src/misc src/signalViewerTab src/signalViewerTab/graphicsObjects src/interfaces/drivers/pcan-driver
 
 
 SOURCES += \ 
@@ -64,7 +64,9 @@ SOURCES += \
     src/application.cpp \
     src/decoding/filterexpression.cpp \
     src/canTraceTab/filterlineedit.cpp \
-    src/common/signalselectordialog.cpp
+    src/common/signalselectordialog.cpp \
+    src/canTraceTab/graphTab/widget_graphTab.cpp \
+    src/canTraceTab/graphTab/widget_signalgraph.cpp
     
 
 HEADERS  += \ 
@@ -113,8 +115,10 @@ HEADERS  += \
     src/application.h \
     src/decoding/filterexpression.h \
     src/canTraceTab/filterlineedit.h \
-    src/common/signalselectordialog.h
-    
+    src/common/signalselectordialog.h \
+    src/canTraceTab/graphTab/widget_graphTab.h \
+    src/canTraceTab/graphTab/widget_signalgraph.h
+
 
 DISTFILES += \
     applogo.rc

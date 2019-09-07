@@ -153,3 +153,85 @@ void CanDecoder::newCanMessageReceived(CanTraceMessage trace_msg)
 	}
 }
 
+SignalValue_t CanDecoder::decodeSignal(QString sigName, const CanTraceMessage& message)
+{
+	SignalValue_t val;
+
+	if(m_dbc == 0)
+		return val;
+
+	CanMessage *msg = m_dbc->getMessage(message.id);
+
+	if(msg == NULL)
+		return val;
+
+	QList<SignalValue_t>sig_list = msg->getSignalsValue(message.data);
+
+	for(int i = 0; i < sig_list.size(); i++)
+	{
+		if(sig_list.at(i).name == sigName)
+			return sig_list.at(i);
+	}
+
+	return val;
+}
+
+QPolygonF CanDecoder::getSignalPoints(QString sigName, const QList<CanTraceMessage> &messages)
+{
+	QPolygonF points;
+
+	if(m_dbc == 0)
+		return points;
+
+	CanSignal *sig = m_dbc->getSignal(sigName);
+
+	if(sig == NULL)
+		return points;
+
+	QList<quint32>msg_ids = sig->getAssociatedMsgIDs();
+
+	for(int i = 0; i < messages.count(); i++)
+	{
+		if(!msg_ids.contains(messages.at(i).id))
+			continue; // Signal not in this message
+
+		SignalValue_t val = decodeSignal(sigName, messages.at(i));
+
+		if(!val.name.isEmpty())
+			points.append(QPointF(messages.at(i).timestamp, val.value));
+	}
+
+	return points;
+}
+
+/*
+QList<SignalValue_t> CanDecoder::decodeSignals(QString sigName, const QList<CanTraceMessage>& messages)
+{
+	QList<SignalValue_t> list;
+
+	if(m_dbc == 0)
+		return list;
+
+	CanSignal *sig = m_dbc->getSignal(sigName);
+
+	if(sig == NULL)
+		return list;
+
+	QList<quint32>msg_ids = sig->getAssociatedMsgIDs();
+
+	for(int i = 0; i < messages.count(); i++)
+	{
+		if(!msg_ids.contains(messages.at(i).id))
+			continue; // Signal not in this message
+
+		SignalValue_t val = decodeSignal(sigName, messages.at(i));
+
+		if(!val.name.isEmpty())
+			list.append(val);
+	}
+
+	return list;
+}
+*/
+
+

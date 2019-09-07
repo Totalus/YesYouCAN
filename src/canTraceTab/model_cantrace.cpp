@@ -573,3 +573,9 @@ void CanTraceModel::useTimestampOffset(bool enable)
 	m_offsetTimestamp = enable;
 	dataChanged(index(0,TRACE_COL_TIMESTAMP), index(rowCount(), TRACE_COL_TIMESTAMP));
 }
+
+
+const QList<CanTraceMessage>& CanTraceModel::getAllMessages()
+{
+	return m_messages;
+}

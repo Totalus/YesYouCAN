@@ -41,6 +41,7 @@ class CanTraceModel : public QAbstractTableModel
 		void clearDbcModel();
 		bool hasDbc() const;
 		CanTraceMessage getMessage(int row);
+		const QList<CanTraceMessage>& getAllMessages();
 		int count();
 		void setCurrentSelectedMsgId(quint32 msg_id); // Called when the message selected changes
 

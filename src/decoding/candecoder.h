@@ -20,6 +20,10 @@ class CanDecoder : public QObject
 
 		DbcModel* getDbc();
 
+		//QList<SignalValue_t> decodeSignals(QString sigName, const QList<CanTraceMessage> &messages);
+		SignalValue_t decodeSignal(QString sigName, const CanTraceMessage &message);
+		QPolygonF getSignalPoints(QString sigName, const QList<CanTraceMessage> &messages);
+
 	public slots:
 		void newCanMessageReceived(CanTraceMessage trace_msg);
 
