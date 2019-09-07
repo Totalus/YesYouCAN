@@ -2,7 +2,7 @@
 
 ## Description
 
-YesYouCAN is a capture and analysis tool for *Controler Area Network* (CAN) systems, which are widely used in the automotive industry for communication between controllers. Checkout the short [**Demo Video**](#video).
+YesYouCAN is a capture and analysis tool for *Controler Area Network* (CAN) systems, which are widely used in the automotive industry for communication between controllers. Checkout the short [**Demo Video**](https://youtu.be/oD7jQTJbPjg).
 
 
 ## Content
@@ -38,10 +38,7 @@ The main missing feature is the signal graphs. There is only a start of implemen
 
 ## Video
 
-Checkout the demo video to see the program and features in action:
-
-<iframe width="887" height="499" src="https://www.youtube.com/embed/oD7jQTJbPjg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
+Checkout the [**Demo Video**](https://youtu.be/oD7jQTJbPjg) to see the program and features in action.
 
 ## State of development
 
