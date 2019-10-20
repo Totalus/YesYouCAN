@@ -41,7 +41,7 @@ You want to contribute, great!
 
 I don't have a lot of time to put on it, but I can definitely guide on where you should start, which files to look at, add some useful documentation, etc. So don't hesitate to message me for help.
 
-There is no written documentation, but there are some useful block diagrams in the `docs` directory that will help you understand the software architecture. The *.graphml* files can be opened with the great and free [*yEd graphics editor*](https://www.yworks.com/products/yed)).
+There is no written documentation, but there are some useful block diagrams in the `docs` directory that will help you understand the software architecture. The *.graphml* files can be opened with the great (and free) [*yEd graphics editor*](https://www.yworks.com/products/yed)).
 
 ## CAN adaptors support
 
