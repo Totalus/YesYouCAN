@@ -33,15 +33,15 @@ Since there is no user manual or documentation, I made a demo video to quickly s
 
 This tool is not currently under development. The source code has been sitting in my hard drive for a while unused. I'm not working on it anymore as I have other projects going on and nobody is acutally using the tool, but I thought it could be a great tool for others to use, customize and/or contribute to.
 
-YesYouCAN has been built from scratch in **C++** with **Qt library** and only very few other dependencies. It has a strong back-end implementation (message capturing, filtering, decoding, ...). The front-end... could be improved, but it is fully functional.
+YesYouCAN has been built from scratch in **C++** with **Qt library**, no other dependency is required to compile the *master* branch. It has a strong back-end implementation (message capturing, filtering, decoding, ...). The front-end... could be improved, but it is fully functional.
 
-If you noticed, there are two branches. The *graphics* branch contains a start of implementation for **signal graphics** (the main feature missing in this tool). It is a good start but is not complete and not yet usable. It uses *qwt* as library for graphics which I found the most suitable after testing a few Qt graphics libraries.
+If you noticed, there are two branches. The *graphics* branch contains a start of implementation for **signal plotting** (the main feature missing in this tool). It is a good start but is not complete and not yet usable. It uses *qwt* as library for graphics which I found the most suitable after testing a few Qt based plotting libraries.
 
 ## Contribute
 
 You want to contribute, great!
 
-I don't have a lot of time to put on it, but I can definitely guide on where you should start, which files to look at, add some useful documentation, etc. So don't hesitate to message me for help.
+I don't have a lot of time to put on it, but I can definitely guide on where you should start, which files to look at, add some useful documentation upon request, etc. So don't hesitate to message me for help.
 
 There is no written documentation, but there are some useful block diagrams in the `docs` directory that will help you understand the software architecture. The *.graphml* files can be opened with the great (and free) [*yEd graphics editor*](https://www.yworks.com/products/yed)).
 
